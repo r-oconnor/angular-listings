@@ -2,9 +2,7 @@ import { ApiService } from './api.service';
 import { Component, OnInit } from '@angular/core';
 declare var google: any;
 var map;
-/*
-declare var geocoder: any;
-*/
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,14 +12,12 @@ export class AppComponent {
   title = 'Angular Listings';
   listings = null;
   geocoder = null;
-  map = null; // map
+  map = null;
 
   constructor(private _apiService: ApiService) { 
-    console.log("constructor");
   }
 
   ngOnInit() {
-    console.log("ngOnInit");
     this.initialize();
     this.search();
     for (var listing = 0; listing < this.listings.length; listing++) {
@@ -33,7 +29,6 @@ export class AppComponent {
   };
 
   initialize() {
-    console.log("initialize");
     this.geocoder = new google.maps.Geocoder();
     var latlng = new google.maps.LatLng(40.7707163, -73.9686116);
     var mapOptions = {
@@ -43,27 +38,14 @@ export class AppComponent {
     map = new google.maps.Map(document.getElementById('map'), mapOptions); //map
   };
 
-
   addMarker(index, address) {
-    console.log("addMarker");
     this.geocoder.geocode({ 'address': address }, function (results, status) {
       if (status == 'OK') {
-        // var map = document.getElementById('map');
-        // var map= Ext.getCmp('mapCanvas').getMap(); // add getMap() here to get the map instance
-        console.dir("map",map); // map
         var marker= new google.maps.Marker({
           position: results[0].geometry.location,
           title: address,
         });
-        marker.setMap(map); // map
-        /*
-        var marker = new google.maps.Marker({
-          map: this.map,
-          position: results[0].geometry.location,
-          title: address,
-          setMap : this.map
-        });
-        */
+        marker.setMap(map);
         marker.addListener('click', function () {
           var items = document.querySelector('ul').getElementsByTagName("li");
           for (var i = 0; i < items.length; ++i) {
@@ -106,12 +88,14 @@ export class AppComponent {
     var dateOut = new Date(newdate);
     return dateOut;
   };
+
   public formatTime(date, time) {
     var datearray = date.split("/");
     var newdate = datearray[1] + '/' + datearray[0] + '/' + datearray[2] + ' ' + time;
     var dateOut = new Date(newdate);
     return dateOut;
   };
+
   public suffix(date) {
     var datearray = date.split("/");
     if (parseInt(datearray[0]) == 1) {
