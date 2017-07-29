@@ -1,6 +1,6 @@
 <h1>{{title}}</h1>
-<ul *ngFor="let listing of listings">
-  <li class="box">
+<ul>
+  <li class="box" *ngFor="let listing of listings">
     {{listing.Property.Address.StreetNumber}} {{listing.Property.Address.StreetName}}
     <span class="price">{{listing.Listing.Price|currency}} <span *ngIf="listing.Listing.Transaction=='Rent'"> per month</span></span>
     <p>{{listing.Listing.Transaction}}</p>
