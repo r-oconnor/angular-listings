@@ -1,0 +1,16 @@
+.box{
+    border: 1px solid black;
+    margin-bottom: 1px;
+}
+.price{
+    float: right;
+}
+li{
+    list-style: none;
+}
+.openHouse{
+    text-align: center;
+}
+.yellow{
+    background-color: yellow;
+}
